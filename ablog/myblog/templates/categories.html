@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<h1>Categories</h1>
+
+<ul>
+    {% for post in category_posts %}
+        <li>
+            
+            <a href="{% url 'article-detail' post.pk %}">{{post.title}} </a>  - {{post.auther}} - {{post.post_date}}
+            {% if user.is_authenticated %}
+                - <a href="{% url 'update_post' post.pk %}">Edit</a> -
+                 <a href="{% url 'delete_post' post.pk %}">Delete</a>
+
+            {% endif %}     
+             <br>
+            {{post.body|slice:":200" | safe}}
+        </li>
+     
+    {% endfor %} 
+</ul>
+
+{% endblock %}
